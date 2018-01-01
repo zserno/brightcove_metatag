@@ -15,7 +15,7 @@ function brightcove_metatag_token_info() {
   );
 
   // Core tokens for Brightcove.
-	$bc = array();
+  $bc = array();
   $bc['video_id'] = array(
     'name' => t("Brightcove video ID"),
     'description' => t("The unique Brightcove Video ID."),
@@ -54,37 +54,37 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
   if ($type == 'brightcove' && !empty($data['node'])) {
     $node = $data['node'];
 
-		// Fetch first item of field_bc.
-		$field_items = field_get_items('node', $node, 'field_bc');
-		$field = reset($field_items);
+    // Fetch first item of field_bc.
+    $field_items = field_get_items('node', $node, 'field_bc');
+    $field = reset($field_items);
 
-		// Load the video object.
-		$bcid = $field['bcid'];
-		$video_id = $field['brightcove_id'];
-		$video = _brightcove_metatag_load_video($bcid, $video_id);
+    // Load the video object.
+    $bcid = $field['bcid'];
+    $video_id = $field['brightcove_id'];
+    $video = _brightcove_metatag_load_video($bcid, $video_id);
 
     foreach ($tokens as $name => $original) {
       switch ($name) {
-        case 'video_id':
-          $replacements[$original] = $video->getID();
-          break;
+      case 'video_id':
+        $replacements[$original] = $video->getID();
+        break;
 
-        case 'name':
-          $replacements[$original] = $sanitize ? check_plain($video->getName()) : $video->getName();
-          break;
+      case 'name':
+        $replacements[$original] = $sanitize ? check_plain($video->getName()) : $video->getName();
+        break;
 
-        case 'description':
-          $replacements[$original] = $sanitize ? check_plain($video->getDescription()) : $video->getDescription();
-          break;
+      case 'description':
+        $replacements[$original] = $sanitize ? check_plain($video->getDescription()) : $video->getDescription();
+        break;
 
-        case 'tags':
-          $replacements[$original] = $sanitize ? check_plain($video->getTags()) : $video->getTags();
-          break;
+      case 'tags':
+        $replacements[$original] = $sanitize ? check_plain($video->getTags()) : $video->getTags();
+        break;
 
-        case 'thumbnail':
-					$images = $video->getImages();
-					$replacements[$original] = $images['thumbnail']->getSrc();
-					break;
+      case 'thumbnail':
+        $images = $video->getImages();
+        $replacements[$original] = $images['thumbnail']->getSrc();
+        break;
       }
     }
   }
@@ -103,7 +103,7 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
  *    Video object or FALSE on failure.
  */
 function _brightcove_metatag_load_video($bcid, $video_id) {
-	$client = entity_load_single('brightcove_client', $bcid);
+  $client = entity_load_single('brightcove_client', $bcid);
   $video = brightcove_load_video($video_id, $client);
 
   return $video;
