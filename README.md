@@ -1,2 +1,2 @@
 # brightcove_metatag
-Provides integration between the Brightcove and Metatag Drupal modules.
+Provides basic token integration for the Brightcove Video Connect Drupal module.
