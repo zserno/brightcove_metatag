@@ -1,6 +1,0 @@
-name = Brightcove Metatag
-description = Provides integration between Brightcove Video Connect and Metatag Drupal modules.
-dependencies[] = brightcove
-dependencies[] = token
-package = Brightcove
-core = 7.x
