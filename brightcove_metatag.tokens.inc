@@ -61,7 +61,9 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
     // Load the video object.
     $bcid = $field['bcid'];
     $video_id = $field['brightcove_id'];
-    $video = _brightcove_metatag_load_video($bcid, $video_id);
+
+    $client = entity_load_single('brightcove_client', $bcid);
+    $video = brightcove_load_video($video_id, $client);
 
     foreach ($tokens as $name => $original) {
       switch ($name) {
@@ -78,7 +80,8 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
         break;
 
       case 'tags':
-        $replacements[$original] = $sanitize ? check_plain($video->getTags()) : $video->getTags();
+        $tags = implode(', ', $video->getTags());
+        $replacements[$original] = $sanitize ? check_plain($tags) : $tags;
         break;
 
       case 'thumbnail':
@@ -90,21 +93,4 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
   }
 
   return $replacements;
-}
-
-/**
- *  Load a Brightcove video from CMS API.
- *
- *  @param string $bcid
- *    A Brightcove client id.
- *  @param string $video_id
- *    A Brightcove video id.
- *  @return \Brightcove\Object\Video\Video|bool
- *    Video object or FALSE on failure.
- */
-function _brightcove_metatag_load_video($bcid, $video_id) {
-  $client = entity_load_single('brightcove_client', $bcid);
-  $video = brightcove_load_video($video_id, $client);
-
-  return $video;
 }
