@@ -11,7 +11,7 @@ Provides basic token integration for the [Brigthcove Video Connect](https://www.
   * [node:field_bc:name]
   * [node:field_bc:thumbnail]
   * [node:field_bc:tags]
-  * [node:field_bc:video_id]
+  * [node:field_bc:description]
 
 ## Example use cases
 
