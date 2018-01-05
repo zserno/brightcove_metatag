@@ -130,7 +130,7 @@ function brightcove_metatag_tokens($type, $tokens, array $data = array(), array 
 
         case 'thumbnail':
           $images = $video->getImages();
-          $replacements[$original] = $images['thumbnail']->getSrc();
+          $replacements[$original] = $images['poster']->getSrc();
           break;
       }
     }
